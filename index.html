@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#171a1a">
+  <title>Ashen Oath — A Pocket RPG</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Spectral:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="Ashen Oath home"><span class="brand-mark">✦</span><span>ASHEN <b>OATH</b></span></a>
+      <div class="chapter"><span class="chapter-dot"></span> THE WILDERNESS <span class="chapter-divider">/</span> <span id="header-wave">PROLOGUE</span></div>
+      <button class="sound-button" id="sound-toggle" aria-label="Toggle sound" title="Toggle sound effects">♫ <span>Sound off</span></button>
+    </header>
+
+    <section class="intro-row">
+      <div><p class="eyebrow" id="eyebrow">A TALE OF STEEL & SORCERY</p><h1 id="screen-title">Your legend begins <i>here.</i></h1></div>
+      <div class="run-stats" id="run-stats" hidden><span>✦ <b id="level-label">LVL 1</b></span><span>◈ <b id="xp-label">0 XP</b></span><span>✧ <b id="focus-label">3 FOCUS</b></span><span>◉ <b id="potion-label">2</b></span></div>
+    </section>
+
+    <section class="class-screen" id="class-screen" aria-label="Choose your class">
+      <div class="class-copy"><div class="ornament">— &nbsp; CHOOSE YOUR PATH &nbsp; —</div><p>Every legend starts with a choice.<br>Choose the hero you want to become.</p></div>
+      <div class="class-grid" id="class-grid"></div>
+      <button class="primary-button begin-button" id="begin-button" disabled>Choose your class <span>→</span></button>
+      <p class="class-footnote">5 encounters · one final boss · no second chances</p>
+    </section>
+
+    <section class="game-screen" id="game-screen" hidden>
+      <div class="battle-layout">
+        <section class="battle-card" aria-label="Battlefield">
+          <div class="battle-topline"><span class="encounter-label"><span class="live-dot"></span> <span id="encounter-label">ENCOUNTER 01</span></span><span class="difficulty" id="difficulty-label">A shadow stirs</span></div>
+          <div class="scene" id="scene">
+            <div class="scene-moon"></div><div class="scene-mountains"></div><div class="scene-ruin ruin-one"></div><div class="scene-ruin ruin-two"></div>
+            <div class="scene-mist mist-one"></div><div class="scene-mist mist-two"></div>
+            <div class="combatant hero-combatant"><div class="hero-glow"></div><div class="hero-figure" id="hero-figure">🛡️</div><div class="ground-shadow"></div><div class="scene-name" id="hero-scene-name">WAYFARER</div></div>
+            <div class="combatant enemy-combatant" id="enemy-combatant"><div class="enemy-aura"></div><div class="enemy-figure" id="enemy-figure">👹</div><div class="ground-shadow"></div><div class="scene-name" id="enemy-scene-name">GOBLIN SCOUT</div></div>
+            <div class="scene-vignette"></div><div class="hit-flash" id="hit-flash"></div>
+            <div class="scene-toast" id="scene-toast" aria-live="polite"></div>
+            <div class="scene-caption"><span id="scene-caption">THE OLD ROAD · DUSK</span><span id="enemy-count">01 / 05</span></div>
+          </div>
+          <div class="combatant-bars">
+            <div class="unit-bar hero-bar"><div class="unit-heading"><span><span class="unit-icon">✦</span> <b id="hero-name">Wayfarer</b> <small id="hero-class">ADVENTURER</small></span><span class="hp-numbers" id="hero-hp-text">30 / 30</span></div><div class="health-track"><div class="health-fill hero-health" id="hero-health"></div></div></div>
+            <div class="versus-mark">VS</div>
+            <div class="unit-bar enemy-bar"><div class="unit-heading"><span><span class="unit-icon enemy-unit-icon">†</span> <b id="enemy-name">Goblin Scout</b></span><span class="hp-numbers" id="enemy-hp-text">18 / 18</span></div><div class="health-track"><div class="health-fill enemy-health" id="enemy-health"></div></div></div>
+          </div>
+        </section>
+
+        <aside class="side-column">
+          <section class="intent-card"><div class="section-kicker">THE ENEMY'S INTENT <span class="intent-icon">⌁</span></div><div class="intent-main"><span class="intent-symbol" id="intent-symbol">⚔</span><div><b id="intent-title">Preparing to strike</b><p id="intent-copy">A threat is gathering...</p></div></div></section>
+          <section class="action-card"><div class="action-header"><div><div class="section-kicker">YOUR TURN</div><h2>What will you do?</h2></div><span class="turn-token">✦</span></div><div class="action-grid" id="action-grid"></div><div class="action-hint" id="action-hint">Choose an action to shape your fate.</div></section>
+          <section class="log-card"><div class="section-kicker">FIELD NOTES <span class="log-live">● LIVE</span></div><div class="battle-log" id="battle-log" aria-live="polite"></div></section>
+        </aside>
+      </div>
+      <footer class="game-footer"><span>✦ &nbsp;THE WILDERNESS DOES NOT FORGIVE</span><button id="retreat-button">↻ &nbsp;Start a new run</button></footer>
+    </section>
+
+    <div class="modal-backdrop" id="modal-backdrop" hidden><section class="result-modal" role="dialog" aria-modal="true" aria-labelledby="result-title"><div class="result-seal" id="result-seal">✦</div><p class="eyebrow" id="result-eyebrow">A MOMENT OF RESPITE</p><h2 id="result-title">Victory.</h2><p id="result-copy"></p><div class="reward-line" id="reward-line"></div><button class="primary-button" id="result-button">Continue <span>→</span></button></section></div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </main>
+  <script src="game.js"></script>
+</body>
+</html>
